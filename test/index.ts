@@ -77,8 +77,38 @@ function insertReadDelete() {
     });
 }
 
+async function operationOrder() {
+    let operations = [];
+
+    let person = {
+        id: pogo.generateKey(new Date()),
+        name: "Eugene Baby",
+        age: 98,
+        tableName: "person"
+    };
+
+    operations.push({
+        operation: "INSERT",
+        values: [person]
+    } as pogo.Delta);
+
+    let updatedPerson = Object.assign({}, person, { age: 99 });
+
+    operations.push({
+        operation: "UPDATE",
+        values: [updatedPerson]
+    } as pogo.Delta);
+
+    await db.commit(operations);
+
+    let queriedPerson = (await db.query("select * from person where id = $1", [person.id]))[0];
+
+    assert.equal(queriedPerson.age, updatedPerson.age);
+}
+
 insertPerson()
     .then(insert100)
     .then(insertReadDelete)
+    .then(operationOrder)
     .then(() => { db.end(); })
     .catch((error) => { db.end(); throw error; });
