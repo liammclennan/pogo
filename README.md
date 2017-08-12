@@ -1,11 +1,20 @@
 Pogo
 ====
 
-Bit of Postgresql + bit of MongoDB = Pogo
+Bit of **Po**stgresql + bit of Mon**go**DB = Pogo
 
 Pogo is a document style node.js client for Postgresql. Working with documents (JSON) instead of relations (tables) will simplify development when your data model includes a lot of one-to-many relationships and few many-to-many relationships. 
 
 To work with Pogo:
+
+1. Install dependencies
+    ```
+    yarn install
+    ```
+    or 
+    ```
+    npm install
+    ```
 
 1. Create a database connection to a Postgresql database. 
     ```javascript
@@ -72,21 +81,3 @@ Notes
 
 Pogo depends on [pg-promise](https://github.com/vitaly-t/pg-promise). The query syntax is the same as pg-promise so [their examples](https://github.com/vitaly-t/pg-promise/wiki/Learn-by-Example) are helpful. 
 
-TODO:
----
-
-* Create tables automatically
-    ```sql
-    CREATE TABLE <tableName> (
-        id char(16) NOT NULL,
-        "data" jsonb NOT NULL,
-        recorded timestamp NOT NULL DEFAULT NOW(),
-        CONSTRAINT <tableName>_pkey PRIMARY KEY (id)
-    )
-    WITH (
-        OIDS=FALSE
-    ) ;
-    CREATE INDEX idx_<tableName>_data ON <tableName> using GIN (data jsonb_path_ops);
-    ```
-
-* Optimistic concurrency
