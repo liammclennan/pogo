@@ -1,0 +1,21 @@
+{
+  "name": "pogo",
+  "version": "0.0.1",
+  "description": "Document database interface for Postgresql",
+  "main": "index.js",
+  "author": "Liam McLennan",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^8.0.20",
+    "@types/pg-promise": "^5.4.3",
+    "typescript": "^2.4.2"
+  },
+  "scripts": {
+    "ts:build": "tsc",
+    "ts:watch": "tsc -w",
+    "test": "node test/index.js"
+  },
+  "dependencies": {
+    "pg-promise": "^6.3.8"
+  }
+}
